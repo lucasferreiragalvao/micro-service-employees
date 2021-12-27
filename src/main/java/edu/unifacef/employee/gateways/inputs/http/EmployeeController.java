@@ -5,6 +5,7 @@ import edu.unifacef.employee.gateways.inputs.http.requests.CreateEmployeeRequest
 import edu.unifacef.employee.gateways.inputs.http.responses.EmployeeResponse;
 import edu.unifacef.employee.gateways.inputs.http.responses.ListResponse;
 import edu.unifacef.employee.usecases.CreateEmployee;
+import edu.unifacef.employee.usecases.FindByEmployeeId;
 import edu.unifacef.employee.usecases.FindEmployees;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ public class EmployeeController {
 
     private final FindEmployees findEmployees;
     private final CreateEmployee createEmployee;
+    private final FindByEmployeeId findByEmployeeId;
 
     @GetMapping
     public ListResponse<EmployeeResponse> findByPage(@RequestParam(defaultValue = "0") final Integer page,
@@ -37,6 +39,12 @@ public class EmployeeController {
     @PostMapping
     public EmployeeResponse create(@RequestBody @Validated final CreateEmployeeRequest createEmployeeRequest) {
         Employee employee = createEmployee.execute(createEmployeeRequest.toDomain());
+        return new EmployeeResponse(employee);
+    }
+
+    @GetMapping(path = "/{id}")
+    public EmployeeResponse find(@PathVariable final String id) {
+        Employee employee = findByEmployeeId.execute(id);
         return new EmployeeResponse(employee);
     }
 }
