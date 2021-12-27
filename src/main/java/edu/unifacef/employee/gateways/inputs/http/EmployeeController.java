@@ -1,6 +1,5 @@
 package edu.unifacef.employee.gateways.inputs.http;
 
-import edu.unifacef.employee.domains.Employee;
 import edu.unifacef.employee.gateways.inputs.http.requests.CreateEmployeeRequest;
 import edu.unifacef.employee.gateways.inputs.http.responses.EmployeeResponse;
 import edu.unifacef.employee.gateways.inputs.http.responses.ListResponse;
@@ -38,13 +37,11 @@ public class EmployeeController {
 
     @PostMapping
     public EmployeeResponse create(@RequestBody @Validated final CreateEmployeeRequest createEmployeeRequest) {
-        Employee employee = createEmployee.execute(createEmployeeRequest.toDomain());
-        return new EmployeeResponse(employee);
+        return new EmployeeResponse(createEmployee.execute(createEmployeeRequest.toDomain()));
     }
 
     @GetMapping(path = "/{id}")
     public EmployeeResponse find(@PathVariable final String id) {
-        Employee employee = findByEmployeeId.execute(id);
-        return new EmployeeResponse(employee);
+        return new EmployeeResponse(findByEmployeeId.execute(id));
     }
 }
