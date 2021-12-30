@@ -39,6 +39,9 @@ public class EmployeeResponse implements Serializable {
   @ApiModelProperty(position = 8)
   private LocalDateTime lastModifiedDate;
 
+  @ApiModelProperty(position = 9)
+  private LocalDateTime deletedAt;
+
   public EmployeeResponse(final Employee employee) {
     this.id = employee.getId();
     this.name = employee.getName();
@@ -49,6 +52,7 @@ public class EmployeeResponse implements Serializable {
     this.status = employee.getStatus();
     this.createdDate = employee.getCreatedDate();
     this.lastModifiedDate = employee.getLastModifiedDate();
+    this.deletedAt = employee.getDeletedAt();
   }
 
 }
