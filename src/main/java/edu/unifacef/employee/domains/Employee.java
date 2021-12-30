@@ -18,5 +18,6 @@ public class Employee {
     private String status;
     private LocalDateTime createdDate;
     private LocalDateTime lastModifiedDate;
+    private LocalDateTime deletedAt;
 
 }

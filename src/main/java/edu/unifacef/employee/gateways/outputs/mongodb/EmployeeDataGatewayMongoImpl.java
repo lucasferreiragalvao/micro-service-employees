@@ -19,7 +19,6 @@ public class EmployeeDataGatewayMongoImpl implements EmployeeDataGateway {
 
     private final EmployeeRepository employeeRepository;
 
-
     @Override
     public Employee save(final Employee employee) {
         if(Objects.isNull(employee.getCreatedDate())) {
@@ -36,5 +35,10 @@ public class EmployeeDataGatewayMongoImpl implements EmployeeDataGateway {
     @Override
     public Page<Employee> findByPage(final Pageable pageable) {
         return employeeRepository.findAll(pageable).map(EmployeeDocument::toDomain);
+    }
+
+    @Override
+    public void deleteEmployee(String id) {
+        employeeRepository.deleteById(id);
     }
 }
