@@ -6,13 +6,11 @@ import edu.unifacef.employee.gateways.inputs.http.responses.EmployeeResponse;
 import edu.unifacef.employee.gateways.inputs.http.responses.ListResponse;
 import edu.unifacef.employee.usecases.*;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-@Slf4j
 @Validated
 @RequiredArgsConstructor
 @RestController

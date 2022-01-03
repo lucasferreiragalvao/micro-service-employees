@@ -19,11 +19,6 @@ public class UpdateEmployee {
     public Employee execute(final Employee employee) {
         log.info("Updating employee. Employee id: {}", employee.getId());
 
-        if(!employeeDataGateway.findById(employee.getId()).isPresent()) {
-            throw new IllegalArgumentException(messageUtils
-                    .getMessage(MessageKey.EMPLOYEE_NOT_FOUND, employee.getId()));
-        }
-
         Employee oldEmployee = employeeDataGateway.findById(employee.getId())
                 .orElseThrow(() -> new IllegalArgumentException(messageUtils
                         .getMessage(MessageKey.EMPLOYEE_NOT_FOUND, employee.getId())));
