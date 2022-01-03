@@ -14,4 +14,6 @@ public interface EmployeeDataGateway {
     Page<Employee> findByPage(Pageable pageable);
 
     void deleteEmployee(String id);
+
+    Optional<Employee> findByCpf(String cpf);
 }

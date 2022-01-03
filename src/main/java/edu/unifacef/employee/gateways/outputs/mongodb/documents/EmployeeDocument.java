@@ -25,6 +25,7 @@ public class EmployeeDocument {
     private LocalDateTime createdDate;
     @LastModifiedDate
     private LocalDateTime lastModifiedDate;
+    private LocalDateTime deletedAt;
 
     public EmployeeDocument(final Employee employee) {
         this.id = employee.getId();
@@ -36,6 +37,7 @@ public class EmployeeDocument {
         this.status = employee.getStatus();
         this.createdDate = employee.getCreatedDate();
         this.lastModifiedDate = employee.getLastModifiedDate();
+        this.deletedAt = employee.getDeletedAt();
     }
 
     public Employee toDomain() {
@@ -49,6 +51,7 @@ public class EmployeeDocument {
                 .status(this.status)
                 .createdDate(this.createdDate)
                 .lastModifiedDate(this.lastModifiedDate)
+                .deletedAt(this.deletedAt)
                 .build();
     }
 

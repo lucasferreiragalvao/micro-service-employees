@@ -1,12 +1,10 @@
 package edu.unifacef.employee.gateways.inputs.http;
 
 import edu.unifacef.employee.gateways.inputs.http.requests.CreateEmployeeRequest;
+import edu.unifacef.employee.gateways.inputs.http.requests.UpdateEmployeeRequest;
 import edu.unifacef.employee.gateways.inputs.http.responses.EmployeeResponse;
 import edu.unifacef.employee.gateways.inputs.http.responses.ListResponse;
-import edu.unifacef.employee.usecases.CreateEmployee;
-import edu.unifacef.employee.usecases.DeleteEmployee;
-import edu.unifacef.employee.usecases.FindByEmployeeId;
-import edu.unifacef.employee.usecases.FindEmployees;
+import edu.unifacef.employee.usecases.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -25,6 +23,7 @@ public class EmployeeController {
     private final CreateEmployee createEmployee;
     private final FindByEmployeeId findByEmployeeId;
     private final DeleteEmployee deleteEmployee;
+    private final UpdateEmployee updateEmployee;
 
     @GetMapping
     public ListResponse<EmployeeResponse> findByPage(@RequestParam(defaultValue = "0") final Integer page,
@@ -50,5 +49,10 @@ public class EmployeeController {
     @DeleteMapping(path = "/{id}")
     public void delete(@PathVariable final String id) {
         deleteEmployee.execute(id);
+    }
+
+    @PutMapping(path = "/{id}")
+    public EmployeeResponse update(@PathVariable final String id, @RequestBody @Validated final UpdateEmployeeRequest updateEmployeeRequest) {
+        return new EmployeeResponse(updateEmployee.execute(updateEmployeeRequest.toDomain(id)));
     }
 }

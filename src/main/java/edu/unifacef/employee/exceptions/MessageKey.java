@@ -8,7 +8,8 @@ import lombok.Getter;
 public enum MessageKey {
 
     EMPLOYEE_NOT_FOUND("employee.not.found"),
-    EMPLOYEE_ALREADY_EXISTS("employee.already.exists");
+    EMPLOYEE_ALREADY_EXISTS("employee.already.exists"),
+    DIFFERENT_EMPLOYEE_CPF("employee.different.cpf");
 
     private String key;
 }
