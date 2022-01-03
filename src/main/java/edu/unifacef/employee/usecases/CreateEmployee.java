@@ -17,10 +17,10 @@ public class CreateEmployee {
     private final MessageUtils messageUtils;
 
     public Employee execute(final Employee employee) {
-        log.info("Create employee. Employee code: {}", employee.getId());
+        log.info("Create employee. Employee CPF {}", employee.getCpf());
 
-        if(employeeDataGateway.findById(employee.getId()).isPresent()) {
-            throw new IllegalArgumentException(messageUtils.getMessage(MessageKey.EMPLOYEE_ALREADY_EXISTS, employee.getId()));
+        if(employeeDataGateway.findById(employee.getCpf()).isPresent()) {
+            throw new IllegalArgumentException(messageUtils.getMessage(MessageKey.EMPLOYEE_ALREADY_EXISTS, employee.getCpf()));
         }
 
         Employee saved = employeeDataGateway.save(employee);

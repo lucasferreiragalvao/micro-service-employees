@@ -38,7 +38,12 @@ public class EmployeeDataGatewayMongoImpl implements EmployeeDataGateway {
     }
 
     @Override
-    public void deleteEmployee(String id) {
+    public void deleteEmployee(final String id) {
         employeeRepository.deleteById(id);
+    }
+
+    @Override
+    public Optional<Employee> findByCpf(final String cpf) {
+        return employeeRepository.findByCpf(cpf).map(EmployeeDocument::toDomain);
     }
 }
