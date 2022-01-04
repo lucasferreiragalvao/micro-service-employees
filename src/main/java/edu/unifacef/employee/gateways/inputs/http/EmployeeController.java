@@ -1,6 +1,7 @@
 package edu.unifacef.employee.gateways.inputs.http;
 
 import edu.unifacef.employee.gateways.inputs.http.requests.CreateEmployeeRequest;
+import edu.unifacef.employee.gateways.inputs.http.requests.PartialUpdateRequest;
 import edu.unifacef.employee.gateways.inputs.http.requests.UpdateEmployeeRequest;
 import edu.unifacef.employee.gateways.inputs.http.responses.EmployeeResponse;
 import edu.unifacef.employee.gateways.inputs.http.responses.ListResponse;
@@ -22,6 +23,7 @@ public class EmployeeController {
     private final FindByEmployeeId findByEmployeeId;
     private final DeleteEmployee deleteEmployee;
     private final UpdateEmployee updateEmployee;
+    private final PartialUpdate partialUpdate;
 
     @GetMapping
     public ListResponse<EmployeeResponse> findByPage(@RequestParam(defaultValue = "0") final Integer page,
@@ -52,5 +54,10 @@ public class EmployeeController {
     @PutMapping(path = "/{id}")
     public EmployeeResponse update(@PathVariable final String id, @RequestBody @Validated final UpdateEmployeeRequest updateEmployeeRequest) {
         return new EmployeeResponse(updateEmployee.execute(updateEmployeeRequest.toDomain(id)));
+    }
+
+    @PatchMapping(path = "/{id}")
+    public EmployeeResponse PartialUpdate(@PathVariable final String id, @RequestBody @Validated final PartialUpdateRequest partialUpdateRequest) {
+        return new EmployeeResponse(partialUpdate.execute(partialUpdateRequest.toDomain(id)));
     }
 }

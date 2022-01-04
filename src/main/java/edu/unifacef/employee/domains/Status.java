@@ -9,27 +9,27 @@ public enum Status {
 
     TRIAL(
             1D,
-            "Trial Period",
+            "TRIAL",
             "Funcionário em periodo de experiência."
     ),
     WORKING(
             2D,
-            "Working",
+            "WORKING",
             "Funcionário exercendo sua função."
     ),
     VACATION(
             3D,
-            "Vacation",
+            "VACATION",
             "Funcionário em periodo de férias."
     ),
     AWAY(
             4D,
-            "Away",
+            "AWAY",
             "Funcionário afastado temporáriamente."
     ),
     FIRED(
             5D,
-            "Fired",
+            "FIRED",
             "Funcionário demitido."
     );
 

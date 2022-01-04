@@ -9,30 +9,43 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.util.Objects;
+
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class UpdateEmployee {
+public class PartialUpdate {
 
     private final EmployeeDataGateway employeeDataGateway;
     private final MessageUtils messageUtils;
 
     public Employee execute(final Employee employee) {
-        log.info("Updating employee. Employee id: {}", employee.getId());
+        log.info("Partial updating employee. Employee id: {}", employee.getId());
 
         Employee oldEmployee = employeeDataGateway.findById(employee.getId())
                 .orElseThrow(() -> new IllegalArgumentException(messageUtils
                         .getMessage(MessageKey.EMPLOYEE_NOT_FOUND, employee.getId())));
 
-        if(!oldEmployee.getCpf().equals(employee.getCpf())) {
-            throw new IllegalArgumentException(messageUtils
-                    .getMessage(MessageKey.DIFFERENT_EMPLOYEE_CPF, oldEmployee.getCpf(), employee.getCpf()));
+        if(!Objects.isNull(employee.getName())) {
+            oldEmployee.setName(employee.getName());
         }
 
-        checkIsValidStatus(employee.getStatus());
+        if(employee.getSalary() != 0) {
+            oldEmployee.setSalary(employee.getSalary());
+        }
 
-        employee.setCreatedDate(oldEmployee.getCreatedDate());
-        return employeeDataGateway.save(employee);
+        if(!Objects.isNull(employee.getFunction())) {
+            oldEmployee.setFunction(employee.getFunction());
+        }
+
+        if(!Objects.isNull(employee.getStatus())) {
+            checkIsValidStatus(employee.getStatus());
+            oldEmployee.setStatus(employee.getStatus());
+        }
+
+        oldEmployee.setLastModifiedDate(LocalDateTime.now());
+        return employeeDataGateway.save(oldEmployee);
     }
 
     private void checkIsValidStatus(String status) {
