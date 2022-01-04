@@ -5,6 +5,7 @@ import lombok.Data;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 public abstract class EmployeeRequest implements Serializable {
@@ -34,5 +35,11 @@ public abstract class EmployeeRequest implements Serializable {
     @NotNull(message = "{required.field}")
     private String status;
 
+    @ApiModelProperty(position = 7)
+    @NotNull(message = "{required.field}")
+    private List<AddressRequest> address;
 
+    @ApiModelProperty(position = 8)
+    @NotNull(message = "{required.field}")
+    private List<PhoneRequest> phone;
 }
