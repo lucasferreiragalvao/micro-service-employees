@@ -1,11 +1,14 @@
 package edu.unifacef.employee.gateways.inputs.http.responses;
 
+import edu.unifacef.employee.domains.Address;
 import edu.unifacef.employee.domains.Employee;
+import edu.unifacef.employee.domains.Phone;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class EmployeeResponse implements Serializable {
@@ -34,12 +37,18 @@ public class EmployeeResponse implements Serializable {
   private String status;
 
   @ApiModelProperty(position = 7)
-  private LocalDateTime createdDate;
+  private List<Address> addresses;
 
   @ApiModelProperty(position = 8)
-  private LocalDateTime lastModifiedDate;
+  private List<Phone> phones;
 
   @ApiModelProperty(position = 9)
+  private LocalDateTime createdDate;
+
+  @ApiModelProperty(position = 10)
+  private LocalDateTime lastModifiedDate;
+
+  @ApiModelProperty(position = 11)
   private LocalDateTime deletedAt;
 
   public EmployeeResponse(final Employee employee) {
@@ -50,6 +59,8 @@ public class EmployeeResponse implements Serializable {
     this.salary = employee.getSalary();
     this.function = employee.getFunction();
     this.status = employee.getStatus();
+    this.addresses = employee.getAddresses();
+    this.phones = employee.getPhones();
     this.createdDate = employee.getCreatedDate();
     this.lastModifiedDate = employee.getLastModifiedDate();
     this.deletedAt = employee.getDeletedAt();

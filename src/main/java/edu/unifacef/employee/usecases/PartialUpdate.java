@@ -41,7 +41,18 @@ public class PartialUpdate {
 
         if(!Objects.isNull(employee.getStatus())) {
             checkIsValidStatus(employee.getStatus());
+
+            if(oldEmployee.getStatus().equals(employee.getStatus())) {
+                throw new IllegalArgumentException(messageUtils
+                        .getMessage(MessageKey.STATUS_ALREADY_SET, employee.getId()));
+            }
+
             oldEmployee.setStatus(employee.getStatus());
+
+            if(oldEmployee.getStatus().equals(Status.FIRED.getKey()) &&
+            Objects.isNull(oldEmployee.getDeletedAt())){
+                oldEmployee.setDeletedAt(LocalDateTime.now());
+            }
         }
 
         oldEmployee.setLastModifiedDate(LocalDateTime.now());
