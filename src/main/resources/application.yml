@@ -1,8 +1,8 @@
 server:
-    port: 8080
+    port: 8082
 spring:
     application:
         name: Employee-Api
     data:
         mongodb:
-            uri: mongodb://localhost:27017/employee-api
+            uri: mongodb://localhost:27032/employee-api
